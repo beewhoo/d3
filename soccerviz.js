@@ -1,5 +1,7 @@
 function createSoccerViz() {
-  d3.csv("http://localhost:8888/worldcup.csv", function(data) {
+  d3.csv("https://raw.githubusercontent.com/beewhoo/d3/master/worldcup.csv?token=GHSAT0AAAAAAB7OMKPDOX2YWKV6OUJDMQEKZATZTAA", function(data) {
+
+  console.log(data);
     overallTeamViz(data);
   })
 
