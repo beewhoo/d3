@@ -22,7 +22,14 @@ function createSoccerViz() {
 
         teamG
             .append("circle")
+            // .attr("r", 0)
+            // .transition()
+            // .delay(function(d,i) { return i * 1000})
+            // .duration(500)
             .attr("r", 20)
+            // .transition()
+            // .duration(500)
+            // .attr("r", 40)
             .style("fill", "pink")
             .style("stroke", "black")
             .style("stroke-width", "1px");
