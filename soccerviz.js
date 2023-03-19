@@ -22,14 +22,14 @@ function createSoccerViz() {
 
         teamG
             .append("circle")
-            // .attr("r", 0)
-            // .transition()
-            // .delay(function(d,i) { return i * 1000})
-            // .duration(500)
+            .attr("r", 0)
+            .transition()
+            .delay(function(d,i) { return i * 1000})
+            .duration(500)
             .attr("r", 20)
-            // .transition()
-            // .duration(500)
-            // .attr("r", 40)
+            .transition()
+            .duration(500)
+            .attr("r", 20)
             .style("fill", "pink")
             .style("stroke", "black")
             .style("stroke-width", "1px");
@@ -41,6 +41,15 @@ function createSoccerViz() {
             .text(function(d) {
                 return d.team;
             });
+
+        d3.selectAll("g.overallG").insert("image")
+          .attr("xlink:href", function(d) {
+              return "images/" + d.team+ ".png";
+          })
+          .attr("width", "45px").attr("height", "20px").attr("x", "-22")
+          .attr("y", "-10");
+
+
 
         var dataKeys = d3.keys(incomingData[0]).filter(function(el) {
             return el != "team" && el != "region";
@@ -67,19 +76,27 @@ function createSoccerViz() {
                 return radiusScale(d[datapoint]);
             });
         };
-
+        //
         teamG.on("mouseover", highlightRegion);
 
         function highlightRegion(mouseOverSelected) {
             d3.selectAll("g.overallG").select("circle").style("fill", function(country) {
-                
+
                 if (country.region === mouseOverSelected.region) {
                     return "red";
                 } else {
                     return "gray";
                 }
+
+
+                d3.selectAll("g.overallG").insert("image", "text")
+                .attr("xlink:href", function(d) {
+                  return "images/" + d.team + ".png";
+                  })
+                    .attr("width", "45px").attr("height", "20px").attr("x", "-22")
+                    .attr("y", "-10");
             });
-        
+
         };
 
     }
