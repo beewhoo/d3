@@ -24,7 +24,7 @@ function createSoccerViz() {
             .append("circle")
             .attr("r", 0)
             .transition()
-            .delay(function(d,i) { return i * 1000})
+            .delay(function(d,i) { return i * 100})
             .duration(500)
             .attr("r", 20)
             .transition()
@@ -46,14 +46,16 @@ function createSoccerViz() {
           .attr("xlink:href", function(d) {
               return "images/" + d.team+ ".png";
           })
-          .attr("width", "45px").attr("height", "20px").attr("x", "-22")
+          .attr("width", "45px").attr("height", "14px").attr("x", "-22")
           .attr("y", "-10");
+
 
 
 
         var dataKeys = d3.keys(incomingData[0]).filter(function(el) {
             return el != "team" && el != "region";
         });
+
 
         d3.select("#controls").selectAll("button.teams")
             .data(dataKeys).enter()
@@ -62,6 +64,7 @@ function createSoccerViz() {
             .html(function(d) {
                 return d;
             });
+            
 
         function buttonClick(datapoint) {
             var maxValue = d3.max(incomingData, function(d) {
@@ -76,7 +79,11 @@ function createSoccerViz() {
                 return radiusScale(d[datapoint]);
             });
         };
-        //
+
+
+
+
+
         teamG.on("mouseover", highlightRegion);
 
         function highlightRegion(mouseOverSelected) {
@@ -87,16 +94,8 @@ function createSoccerViz() {
                 } else {
                     return "gray";
                 }
-
-
-                d3.selectAll("g.overallG").insert("image", "text")
-                .attr("xlink:href", function(d) {
-                  return "images/" + d.team + ".png";
-                  })
-                    .attr("width", "45px").attr("height", "20px").attr("x", "-22")
-                    .attr("y", "-10");
             });
-
+            
         };
 
     }
